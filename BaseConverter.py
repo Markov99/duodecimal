@@ -194,7 +194,7 @@ class BaseConverter:
         return BaseConverter(other,self.digits) ** self
 
     def __repr__(self):
-        if '.' in self.string: 
+        if ';' in self.string: 
             return self.string[:7].rstrip('0') + f'(base{self.base})'
         else:
             return self.string + f'(base{self.base})'
