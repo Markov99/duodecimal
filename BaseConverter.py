@@ -254,15 +254,15 @@ class duo(BaseConverter):
     '''
 
     def __init__(self,number):
-        BaseConverter.__init__(self,number,'0123456789XE')
+        BaseConverter.__init__(self,number,self.bases[12])
 
 class binary(BaseConverter):
     def __init__(self,number):
-        BaseConverter.__init__(self,number,'01')
+        BaseConverter.__init__(self,number,self.bases[2])
 
 class hexa(BaseConverter):
     def __init__(self,number):
-        BaseConverter.__init__(self,number,'0123456789ABCDEF')
+        BaseConverter.__init__(self,number,self.bases[16])
 
 if __name__ == '__main__':
     a = duo(2)
