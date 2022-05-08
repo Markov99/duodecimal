@@ -37,7 +37,7 @@ class BaseConverter:
         elif type(number) == str:
             self.value = BaseConverter.to_dec(number, digits)
             self.string = number
-        elif isinstance(number, self):
+        elif isinstance(number, self.__class__):
             self.value = number.value
             self.string = BaseConverter.from_dec(number, digits)
         else:
@@ -120,12 +120,12 @@ class BaseConverter:
         return out
 
     def __add__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return BaseConverter(self.value + other.value, digits=self.digits)
 
     def __iadd__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         self.value = self.value + other.value
         self.string = BaseConverter.from_dec(self.value, digits=self.digits)
@@ -135,12 +135,12 @@ class BaseConverter:
         return BaseConverter(other, self.digits) + self
 
     def __sub__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return BaseConverter(self.value - other.value, digits=self.digits)
 
     def __isub__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         self.value = self.value - other.value
         self.string = BaseConverter.from_dec(self.value, digits=self.digits)
@@ -150,12 +150,12 @@ class BaseConverter:
         return BaseConverter(other, self.digits) - self
 
     def __mul__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return BaseConverter(self.value * other.value, digits=self.digits)
 
     def __imul__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         self.value = self.value * other.value
         self.string = BaseConverter.from_dec(self.value, digits=self.digits)
@@ -165,12 +165,12 @@ class BaseConverter:
         return BaseConverter(other, self.digits) * self
 
     def __truediv__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return BaseConverter(self.value / other.value, self.digits)
 
     def __itruediv__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         self.value = self.value / other.value
         self.string = BaseConverter.from_dec(self.value, digits=self.digits)
@@ -180,12 +180,12 @@ class BaseConverter:
         return BaseConverter(other, self.digits) / self
 
     def __pow__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return BaseConverter(self.value ** other.value, self.digits)
 
     def __ipow__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         self.value = self.value ** other.value
         self.string = BaseConverter.from_dec(self.value, digits=self.digits)
@@ -201,32 +201,32 @@ class BaseConverter:
             return self.string + f'(base{self.base})'
 
     def __lt__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return self.value < other.value
 
     def __le__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return self.value <= other.value
 
     def __eq__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return self.value == other.value
 
     def __ne__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return self.value != other.value
 
     def __ge__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return self.value >= other.value
 
     def __gt__(self, other):
-        if not isinstance(other, self):
+        if not isinstance(other, self.__class__):
             other = BaseConverter(other, self.digits)
         return self.value > other.value
 
