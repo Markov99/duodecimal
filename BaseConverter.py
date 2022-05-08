@@ -17,9 +17,13 @@ class BaseConverter:
             2  : '01',
             8  : '01234567',
             10 : '0123456789',
-            12 : '0123456789XE',
+            12 : '0123456789↊↋',
             16 : '0123456789ABCDEF'
             }
+    # separators = {
+    #     10: '.',
+    #     12: ';'
+    # }
 
     def __init__(self,number,digits):
         ''' determine type of input and convert to decimal/duodecimal '''
@@ -63,6 +67,8 @@ class BaseConverter:
             quotient, remainder = divmod(quotient,base)
             out.insert(0,remainder)
         integer = ''.join([to_digits[dig] for dig in out])
+        if integer == '':
+            integer = '0'
 
         if fractional:
             out = []
@@ -72,10 +78,10 @@ class BaseConverter:
                 out.append(quotient)
             if remainder > 0.5:
                 out.append(1)
-            decimal = '.' + ''.join([to_digits[dig] for dig in out])
+            decimal = ';' + ''.join([to_digits[dig] for dig in out])
         else:
             decimal = ''
-            
+
         return sign + integer + decimal.rstrip('0')
    
     @staticmethod
@@ -95,12 +101,12 @@ class BaseConverter:
         else:
             sign = 1
             
-        if set(string) > set(digits+'.'):
-            invalid = set(string) - set(digits+'.')
+        if set(string) > set(digits+';'):
+            invalid = set(string) - set(digits+';')
             raise ValueError('invalid character'.format(invalid))
         
-        if '.' in string:
-            integer, fractional = string.split('.')
+        if ';' in string:
+            integer, fractional = string.split(';')
         else:
             integer, fractional = string, ''
         
